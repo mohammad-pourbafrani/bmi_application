@@ -15,6 +15,16 @@ class Themes {
       fontSize: 14,
       fontWeight: FontWeight.normal,
     ),
+    headline3: TextStyle(
+      fontFamily: fontname,
+      fontSize: 18,
+      fontWeight: FontWeight.bold,
+    ),
+    headline4: TextStyle(
+      fontFamily: fontname,
+      fontSize: 26,
+      fontWeight: FontWeight.bold,
+    ),
   ));
   static final darkTheme = ThemeData(
       // textTheme: GoogleFonts.poppinsTextTheme().apply(

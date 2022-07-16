@@ -4,11 +4,14 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class GetStartButton extends StatelessWidget {
-  GetStartButton({Key? key, required this.size}) : super(key: key);
+  GetStartButton({Key? key, required this.size, required this.onTab})
+      : super(key: key);
   Size size;
+  VoidCallback onTab;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onTab,
       child: Container(
         margin: const EdgeInsets.only(top: 60),
         width: size.width / 1.5,
@@ -56,6 +59,28 @@ class SkipButton extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class CustomiesCard extends StatelessWidget {
+  CustomiesCard({Key? key, required this.chaild}) : super(key: key);
+
+  Widget chaild;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: const BorderSide(
+            color: AppColors.selectCardLightColor,
+            width: 3,
+          ),
+        ),
+        child: chaild,
       ),
     );
   }

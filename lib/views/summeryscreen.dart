@@ -3,6 +3,7 @@ import 'package:bmi_application/components.dart';
 import 'package:bmi_application/controllers/summery_controller.dart';
 import 'package:bmi_application/utils/appcolors.dart';
 import 'package:bmi_application/utils/theme.dart';
+import 'package:bmi_application/views/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -105,7 +106,14 @@ class SummeryScreen extends StatelessWidget {
                     ),
                     Obx((() {
                       return summeryController.curentIndex.value == 2
-                          ? GetStartButton(size: summeryController.size)
+                          ? GetStartButton(
+                              size: summeryController.size,
+                              onTab: () {
+                                Get.off(
+                                  MainScreen(),
+                                );
+                              },
+                            )
                           : SkipButton(
                               size: summeryController.size,
                               onTab: () {

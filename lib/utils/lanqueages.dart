@@ -15,6 +15,10 @@ class Languages extends Translations {
               'By using this application, you will find out what the range of BMI is and useful information will be provided to you.',
           'getstart': 'Get Started Now',
           'skip': 'Skip',
+          'bmi': 'BMI',
+          'textHeaderHomescreen': 'BMI Calculater',
+          'male': 'Male',
+          'fmale': 'Female',
         },
         'fa_IR': {
           'title1': 'BMI چیست؟',
@@ -28,6 +32,10 @@ class Languages extends Translations {
               'با استفاده از این اپلیکیشن متوجه می‌شوید BMI بدست آمده در محدوده چه وزنی است و اطلاعات مفیدی در اختیار شما قرار می گیرد',
           'getstart': 'حالا شروع کنید',
           'skip': 'رد شدن',
+          'bmi': 'انجام',
+          'textHeaderHomescreen': 'محاسبه گر BMI',
+          'male': 'مرد',
+          'fmale': 'زن',
         }
       };
 }
