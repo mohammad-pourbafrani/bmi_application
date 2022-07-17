@@ -25,6 +25,11 @@ class Themes {
       fontSize: 26,
       fontWeight: FontWeight.bold,
     ),
+    subtitle1: TextStyle(
+      fontFamily: fontname,
+      fontSize: 20,
+      fontWeight: FontWeight.normal,
+    ),
   ));
   static final darkTheme = ThemeData(
       // textTheme: GoogleFonts.poppinsTextTheme().apply(

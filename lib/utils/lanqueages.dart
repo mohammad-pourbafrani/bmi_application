@@ -19,6 +19,8 @@ class Languages extends Translations {
           'textHeaderHomescreen': 'BMI Calculater',
           'male': 'Male',
           'fmale': 'Female',
+          'height': 'Height (in cm)',
+          'age': 'Age',
         },
         'fa_IR': {
           'title1': 'BMI چیست؟',
@@ -36,6 +38,8 @@ class Languages extends Translations {
           'textHeaderHomescreen': 'محاسبه گر BMI',
           'male': 'مرد',
           'fmale': 'زن',
+          'height': 'قد (سانتی متر)',
+          'age': 'سن',
         }
       };
 }
