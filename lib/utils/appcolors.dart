@@ -7,7 +7,8 @@ class AppColors {
   static const activeIconNavBarLightColor = Colors.white;
   static const inActiveIconNavBarLightColor = Colors.black;
   static const dotLightColor = Colors.grey;
-  static const selectCardLightColor = Color.fromARGB(155, 158, 158, 158);
+  static const cardLightColor = Color.fromARGB(155, 158, 158, 158);
+  static const selectedCardLightColor = Color.fromARGB(207, 15, 10, 10);
   static const rulerLightColor = Color.fromARGB(155, 70, 70, 70);
   static const textLightColor = Color.fromARGB(255, 0, 0, 0);
   static const textTitleLightColor = Color.fromARGB(255, 13, 0, 201);

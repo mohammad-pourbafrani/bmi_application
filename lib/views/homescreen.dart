@@ -21,59 +21,73 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //  header
-                Text(
-                  'textHeaderHomescreen'.tr,
-                  style: Get.textTheme.headline4!.apply(
-                    color: AppColors.textLightColor,
-                  ),
-                ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 8),
                 //gender
                 Row(
                   children: [
-                    Expanded(
-                        child: CustomiesCardInkwel(
-                      chaild: SizedBox(
-                        height: mainController.size.height / 4,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/images/male.png',
-                              height: mainController.size.height / 6,
-                            ),
-                            Text(
-                              'male'.tr,
-                              style: Get.textTheme.headline3!
-                                  .apply(color: AppColors.textLightColor),
-                            )
-                          ],
-                        ),
-                      ),
-                    )),
-                    Expanded(
-                      child: CustomiesCardInkwel(
+                    Expanded(child: Obx((() {
+                      return CustomiesCardInkwel(
+                        onTab: () {
+                          mainController.gender.value = "male";
+                        },
+                        select: mainController.gender.value == "male"
+                            ? true
+                            : false,
                         chaild: SizedBox(
-                          height: mainController.size.height / 4,
+                          height: mainController.size.height / 5,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.asset(
-                                'assets/images/fmale.png',
-                                height: mainController.size.height / 6,
+                                'assets/images/male.png',
+                                height: mainController.size.height / 7,
                               ),
                               Text(
-                                'fmale'.tr,
+                                'male'.tr,
                                 style: Get.textTheme.headline3!
                                     .apply(color: AppColors.textLightColor),
                               )
                             ],
                           ),
                         ),
-                      ),
+                      );
+                    }))),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      child: Obx((() {
+                        return CustomiesCardInkwel(
+                          onTab: () {
+                            mainController.gender.value = "female";
+                          },
+                          select: mainController.gender.value == "female"
+                              ? true
+                              : false,
+                          chaild: SizedBox(
+                            height: mainController.size.height / 5,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/images/fmale.png',
+                                  height: mainController.size.height / 7,
+                                ),
+                                Text(
+                                  'fmale'.tr,
+                                  style: Get.textTheme.headline3!
+                                      .apply(color: AppColors.textLightColor),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      })),
                     ),
                   ],
+                ),
+                const SizedBox(
+                  height: 8,
                 ),
                 //height
                 CustomiesCard(
@@ -89,12 +103,16 @@ class HomeScreen extends StatelessWidget {
                               .apply(color: AppColors.textLightColor),
                         ),
                         SizedBox(
-                          height: (Get.size.height / 18.5) * 1.5,
+                          height: (Get.size.height / 19) * 1.5,
                           width: (Get.size.width / 5) * 4,
-                          child: HeightNumber(),
+                          child: HeightNumber(
+                            result: (int height) {
+                              mainController.height = height;
+                            },
+                          ),
                         ),
                         SizedBox(
-                          height: (Get.size.height / 18.5) * 1.5,
+                          height: (Get.size.height / 19) * 1.5,
                           width: (Get.size.width / 7) * 5,
                           child: const Ruler(),
                         )
@@ -102,46 +120,53 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                const SizedBox(
+                  height: 8,
+                ),
                 //
                 Row(
                   children: [
                     Expanded(
                       child: CustomiesCard(
                         chaild: SizedBox(
-                          height: mainController.size.height / 4,
+                          height: mainController.size.height / 5,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Text(
-                                'age'.tr,
+                                'weight'.tr,
                                 style: Get.textTheme.headline3!
                                     .apply(color: AppColors.textLightColor),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  RectangleMiniButton(
-                                    chaild: const Icon(
-                                      Icons.minimize_rounded,
-                                    ),
+                              Container(
+                                width: (Get.size.width / 3.5),
+                                height: (Get.size.height / 18.5) * 1.5,
+                                decoration: BoxDecoration(
+                                  color: AppColors.cardLightColor,
+                                  border: Border.all(
+                                    color: AppColors.rulerLightColor,
+                                    width: 2,
                                   ),
-                                  Text("25"),
-                                  RectangleMiniButton(
-                                    chaild: const Icon(
-                                      CupertinoIcons.add,
-                                    ),
-                                  ),
-                                ],
-                              )
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                child: HeightNumber(
+                                  result: (int weight) {
+                                    mainController.weight = weight;
+                                  },
+                                ),
+                              ),
                             ],
                           ),
                         ),
                       ),
                     ),
+                    const SizedBox(
+                      width: 16,
+                    ),
                     Expanded(
                       child: CustomiesCard(
                         chaild: SizedBox(
-                          height: mainController.size.height / 4,
+                          height: mainController.size.height / 5,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -153,17 +178,20 @@ class HomeScreen extends StatelessWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  RectangleMiniButton(
-                                    chaild: const Icon(
-                                      Icons.minimize_rounded,
-                                      size: 16,
+                                  IconButton(
+                                    onPressed: () {
+                                      mainController.discrementAge();
+                                    },
+                                    icon: const Icon(
+                                      CupertinoIcons.minus_square,
+                                      size: 32,
                                     ),
                                   ),
                                   const SizedBox(
                                     width: 16,
                                   ),
                                   Text(
-                                    "25",
+                                    mainController.age.toString(),
                                     style: Get.textTheme.headline4!.apply(
                                       color: AppColors.textLightColor,
                                     ),
@@ -171,10 +199,13 @@ class HomeScreen extends StatelessWidget {
                                   const SizedBox(
                                     width: 16,
                                   ),
-                                  RectangleMiniButton(
-                                    chaild: const Icon(
-                                      CupertinoIcons.add,
-                                      size: 16,
+                                  IconButton(
+                                    onPressed: () {
+                                      mainController.incrementAge();
+                                    },
+                                    icon: const Icon(
+                                      CupertinoIcons.plus_app,
+                                      size: 32,
                                     ),
                                   ),
                                 ],

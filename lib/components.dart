@@ -1,7 +1,10 @@
+import 'package:bmi_application/controllers/main_controller.dart';
 import 'package:bmi_application/utils/appcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
+import 'package:inview_notifier_list/inview_notifier_list.dart';
 
 class GetStartButton extends StatelessWidget {
   GetStartButton({Key? key, required this.size, required this.onTab})
@@ -65,19 +68,29 @@ class SkipButton extends StatelessWidget {
 }
 
 class CustomiesCardInkwel extends StatelessWidget {
-  CustomiesCardInkwel({Key? key, required this.chaild}) : super(key: key);
+  CustomiesCardInkwel(
+      {Key? key,
+      required this.chaild,
+      required this.onTab,
+      required this.select})
+      : super(key: key);
 
   Widget chaild;
+  VoidCallback onTab;
+  bool select;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: onTab,
       child: Card(
         color: AppColors.scaffoldLightColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
-          side: const BorderSide(
-            color: AppColors.selectCardLightColor,
+          side: BorderSide(
+            color: select
+                ? AppColors.selectedCardLightColor
+                : AppColors.cardLightColor,
             width: 3,
           ),
         ),
@@ -99,7 +112,7 @@ class CustomiesCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: const BorderSide(
-          color: AppColors.selectCardLightColor,
+          color: AppColors.cardLightColor,
           width: 3,
         ),
       ),
@@ -108,29 +121,72 @@ class CustomiesCard extends StatelessWidget {
   }
 }
 
+ScrollController scrollController = ScrollController();
+
 class HeightNumber extends StatelessWidget {
-  const HeightNumber({Key? key}) : super(key: key);
+  HeightNumber({Key? key, required this.result}) : super(key: key);
+
+  Function(int) result;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        physics: const BouncingScrollPhysics(),
+    return SizedBox(
+      width: double.infinity,
+      height: (Get.size.height / 19) * 1.5,
+      child: InViewNotifierList(
         scrollDirection: Axis.horizontal,
+        controller: scrollController,
+        initialInViewIds: const ['2'],
+        isInViewPortCondition:
+            (double deltaTop, double deltaBottom, double vpHeight) {
+          return deltaTop < (0.5 * vpHeight) + 5.0 &&
+              deltaBottom > (0.5 * vpHeight) - 5.0;
+        },
         itemCount: 230,
-        itemBuilder: ((context, index) {
-          return Center(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 14),
-              child: Text(
-                "$index",
-                style: Get.textTheme.subtitle1!
-                    .apply(color: AppColors.textLightColor),
-              ),
+        builder: (BuildContext context, int index) {
+          return Container(
+            alignment: Alignment.center,
+            margin: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: InViewNotifierWidget(
+              id: index.toString(),
+              builder: (BuildContext context, bool isInView, Widget? child) {
+                result(index);
+                //final String inViewTxt = isInView ? 'inView' : 'notInView';
+                // print(id);
+                return Text(
+                  index.toString(),
+                  // key: ValueKey("item-$index"),
+                  style: isInView
+                      ? Get.textTheme.headline4!
+                          .apply(color: AppColors.textLightColor)
+                      : Get.textTheme.subtitle1!
+                          .apply(color: AppColors.textLightColor),
+                );
+              },
             ),
           );
-        }));
+        },
+      ),
+    );
   }
 }
+
+// ListView.builder(
+//           physics: const BouncingScrollPhysics(),
+//           scrollDirection: Axis.horizontal,
+//           itemCount: 230,
+//           itemBuilder: ((context, index) {
+//             return Center(
+//               child: Padding(
+//                 padding: const EdgeInsets.only(left: 18),
+//                 child: Text(
+//                   "$index",
+//                   style: Get.textTheme.subtitle1!
+//                       .apply(color: AppColors.textLightColor),
+//                 ),
+//               ),
+//             );
+//           })),
 
 class Ruler extends StatelessWidget {
   const Ruler({Key? key}) : super(key: key);
@@ -168,25 +224,6 @@ class Ruler extends StatelessWidget {
           return const SizedBox.shrink();
         }
       },
-    );
-  }
-}
-
-class RectangleMiniButton extends StatelessWidget {
-  RectangleMiniButton({Key? key, required this.chaild}) : super(key: key);
-  Icon chaild;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 24,
-      height: 24,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: AppColors.rulerLightColor,
-          width: 4,
-        ),
-      ),
-      child: chaild,
     );
   }
 }
