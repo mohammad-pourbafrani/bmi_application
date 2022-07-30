@@ -25,7 +25,8 @@ class MainController extends GetxController {
 
   //lists
 
-  List<InfoUser> userInformation = [];
+  List userInformation = <InfoUser>[];
+  List<InfoUser> dataUserInfoFilter = [];
 
   //other controller
 
@@ -35,6 +36,7 @@ class MainController extends GetxController {
 
   @override
   void onInit() {
+    getAllInfo();
     super.onInit();
   }
 
@@ -93,6 +95,7 @@ class MainController extends GetxController {
       weight: weight,
       bmi: bmi,
       date: DateTime.now(),
+      status: status,
     );
   }
 
@@ -108,20 +111,28 @@ class MainController extends GetxController {
     return infoUserBox.getAt(index) as InfoUser;
   }
 
-  // getAllInfo() async {
-  //   Box box;
-  //   try {
-  //     box = Hive.box(dbName);
-  //   } catch (error) {
-  //     box = await Hive.openBox(dbName);
-  //   }
+  getAllInfo() async {
+    Box box;
+    try {
+      box = Hive.box(dbName);
+    } catch (error) {
+      box = await Hive.openBox<InfoUser>(dbName);
+    }
 
-  //   var allData = box.get(dbName);
-  //   print(allData);
-  //   if (allData != null) {
-  //     userInformation = allData.t;
-  //   }
-  // }
+    userInformation = [];
+    userInformation = box.values.toList();
+  }
+
+  void filterData(String filterName) {
+    getAllInfo();
+    dataUserInfoFilter = [];
+    for (var element in userInformation) {
+      if (element.name == filterName) {
+        dataUserInfoFilter.add(element);
+      }
+    }
+    update();
+  }
 
   List<String> getNames() {
     List<String> names = [];

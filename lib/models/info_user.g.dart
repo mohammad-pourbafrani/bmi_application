@@ -24,13 +24,14 @@ class InfoUserAdapter extends TypeAdapter<InfoUser> {
       weight: fields[4] as int,
       bmi: fields[5] as double,
       date: fields[6] as DateTime,
+      status: fields[7] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, InfoUser obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class InfoUserAdapter extends TypeAdapter<InfoUser> {
       ..writeByte(5)
       ..write(obj.bmi)
       ..writeByte(6)
-      ..write(obj.date);
+      ..write(obj.date)
+      ..writeByte(7)
+      ..write(obj.status);
   }
 
   @override

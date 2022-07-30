@@ -11,24 +11,29 @@ class ChartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final info = mainController.getInfoUserByIndex(0);
-    return ValueListenableBuilder(
-        valueListenable: Hive.box(mainController.dbName).listenable(),
-        builder: (context, Box infoUserBox, _) {
-          return ListView.builder(
-            itemCount: infoUserBox.length,
-            itemBuilder: ((context, index) {
-              final info = mainController.getInfoUserByIndex(index);
-              return Ink(
-                child: ListTile(
-                  title: Text(
-                    info.name,
-                  ),
-                  subtitle: Text(info.bmi.toString()),
-                ),
-              );
-            }),
-          );
-        });
+    // final info = mainController.getInfoUserByIndex(0);
+    return Container();
   }
 }
+
+
+/*
+ValueListenableBuilder(
+          valueListenable: Hive.box(mainController.dbName).listenable(),
+          builder: (context, Box infoUserBox, _) {
+            return ListView.builder(
+              itemCount: infoUserBox.length,
+              itemBuilder: ((context, index) {
+                final info = mainController.getInfoUserByIndex(index);
+                return Ink(
+                  child: ListTile(
+                    title: Text(
+                      info.name,
+                    ),
+                    subtitle: Text(info.bmi.toString()),
+                  ),
+                );
+              }),
+            );
+          }),
+          */

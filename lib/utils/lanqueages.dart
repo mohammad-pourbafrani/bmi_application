@@ -42,6 +42,9 @@ class Languages extends Translations {
           'btn_save': 'Save',
           'massage_save': 'Information save successfully.',
           'select_name': 'Selecte Name',
+          'text_bmi': 'Bmi',
+          'date_save': 'date',
+          'status': 'status',
         },
         'fa_IR': {
           'title1': 'BMI چیست؟',
@@ -81,6 +84,9 @@ class Languages extends Translations {
           'btn_save': 'دخیره',
           'massage_save': 'اطلاعات با موفقیت دخیره شد.',
           'select_name': 'انتخاب نام',
+          'text_bmi': 'Bmi',
+          'date_save': 'زمان',
+          'status': 'وضعیت',
         }
       };
 }

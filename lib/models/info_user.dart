@@ -25,13 +25,16 @@ class InfoUser {
   @HiveField(6)
   final DateTime date;
 
-  InfoUser({
-    required this.name,
-    required this.age,
-    required this.gender,
-    required this.height,
-    required this.weight,
-    required this.bmi,
-    required this.date,
-  });
+  @HiveField(7)
+  final String status;
+
+  InfoUser(
+      {required this.name,
+      required this.age,
+      required this.gender,
+      required this.height,
+      required this.weight,
+      required this.bmi,
+      required this.date,
+      required this.status});
 }
