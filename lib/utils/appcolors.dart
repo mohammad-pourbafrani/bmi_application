@@ -16,3 +16,21 @@ class AppColors {
   static const dotActiveLightColor = Color.fromARGB(255, 67, 154, 253);
   static const btnLightColor = Color.fromARGB(255, 67, 154, 253);
 }
+
+class GradianetAppColors {
+  static const backgrandColorWeightChart = [
+    Color.fromARGB(200, 13, 0, 201),
+    Color.fromARGB(220, 13, 0, 201),
+    Color.fromARGB(255, 13, 0, 201),
+  ];
+  static const backgrandColorBmiChart = [
+    Color.fromARGB(220, 255, 72, 0),
+    Color.fromARGB(235, 255, 72, 0),
+    Color.fromARGB(255, 255, 72, 0),
+  ];
+  static const belowColorWeightChart = [
+    Color.fromARGB(100, 255, 255, 255),
+    Color.fromARGB(50, 255, 255, 255),
+    Color.fromARGB(0, 255, 255, 255),
+  ];
+}

@@ -2,7 +2,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:bmi_application/components.dart';
 import 'package:bmi_application/controllers/summery_controller.dart';
 import 'package:bmi_application/utils/appcolors.dart';
-import 'package:bmi_application/utils/theme.dart';
 import 'package:bmi_application/views/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +11,7 @@ import '../models/itemes_model.dart';
 class SummeryScreen extends StatelessWidget {
   SummeryScreen({Key? key}) : super(key: key);
 
-  SummeryController summeryController = Get.put(SummeryController());
+  final SummeryController summeryController = Get.put(SummeryController());
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +109,7 @@ class SummeryScreen extends StatelessWidget {
                               size: summeryController.size,
                               onTab: () {
                                 Get.off(
-                                  MainScreen(),
+                                  const MainScreen(),
                                 );
                               },
                             )

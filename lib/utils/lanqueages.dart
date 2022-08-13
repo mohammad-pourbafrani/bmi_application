@@ -45,6 +45,10 @@ class Languages extends Translations {
           'text_bmi': 'Bmi',
           'date_save': 'date',
           'status': 'status',
+          'last_month': 'Last',
+          'next_month': 'Next',
+          'current_month': 'Current',
+          'save_snackbar': 'Save',
         },
         'fa_IR': {
           'title1': 'BMI چیست؟',
@@ -87,6 +91,10 @@ class Languages extends Translations {
           'text_bmi': 'Bmi',
           'date_save': 'زمان',
           'status': 'وضعیت',
+          'last_month': 'قبل',
+          'next_month': 'بعد',
+          'current_month': 'جاری',
+          'save_snackbar': 'دخیره',
         }
       };
 }

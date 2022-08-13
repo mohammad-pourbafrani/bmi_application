@@ -11,8 +11,4 @@ class SummeryController extends GetxController {
   //other controller
   PageController pageController = PageController(initialPage: 0);
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
 }

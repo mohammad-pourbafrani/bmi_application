@@ -1,16 +1,13 @@
-import 'package:bmi_application/controllers/main_controller.dart';
 import 'package:bmi_application/utils/appcolors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:inview_notifier_list/inview_notifier_list.dart';
 
 class GetStartButton extends StatelessWidget {
-  GetStartButton({Key? key, required this.size, required this.onTab})
+  const GetStartButton({Key? key, required this.size, required this.onTab})
       : super(key: key);
-  Size size;
-  VoidCallback onTab;
+  final Size size;
+  final VoidCallback onTab;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -35,10 +32,10 @@ class GetStartButton extends StatelessWidget {
 }
 
 class SkipButton extends StatelessWidget {
-  SkipButton({Key? key, required this.size, required this.onTab})
+  const SkipButton({Key? key, required this.size, required this.onTab})
       : super(key: key);
-  Size size;
-  VoidCallback onTab;
+  final Size size;
+  final VoidCallback onTab;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -67,17 +64,51 @@ class SkipButton extends StatelessWidget {
   }
 }
 
+class ControlButton extends StatelessWidget {
+  const ControlButton(
+      {Key? key,
+      required this.size,
+      required this.onTab,
+      required this.widgets})
+      : super(key: key);
+  final Size size;
+  final VoidCallback onTab;
+  final List<Widget> widgets;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTab,
+      child: Container(
+        width: size.width / 4,
+        height: size.height / 12,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(32),
+            border: Border.all(
+              color: Colors.grey,
+              width: 2,
+            ),
+            color: Colors.grey.shade200),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: widgets,
+        ),
+      ),
+    );
+  }
+}
+
 class CustomiesCardInkwel extends StatelessWidget {
-  CustomiesCardInkwel(
+  const CustomiesCardInkwel(
       {Key? key,
       required this.chaild,
       required this.onTab,
       required this.select})
       : super(key: key);
 
-  Widget chaild;
-  VoidCallback onTab;
-  bool select;
+  final Widget chaild;
+  final VoidCallback onTab;
+  final bool select;
 
   @override
   Widget build(BuildContext context) {
@@ -101,9 +132,9 @@ class CustomiesCardInkwel extends StatelessWidget {
 }
 
 class CustomiesCard extends StatelessWidget {
-  CustomiesCard({Key? key, required this.chaild}) : super(key: key);
+  const CustomiesCard({Key? key, required this.chaild}) : super(key: key);
 
-  Widget chaild;
+  final Widget chaild;
 
   @override
   Widget build(BuildContext context) {
@@ -124,9 +155,9 @@ class CustomiesCard extends StatelessWidget {
 ScrollController scrollController = ScrollController();
 
 class HeightNumber extends StatelessWidget {
-  HeightNumber({Key? key, required this.result}) : super(key: key);
+  const HeightNumber({Key? key, required this.result}) : super(key: key);
 
-  Function(int) result;
+  final Function(int) result;
 
   @override
   Widget build(BuildContext context) {
