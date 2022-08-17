@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({Key? key}) : super(key: key);
-  MainController mainController = Get.put(MainController());
+  final MainController mainController = Get.put(MainController());
   // RxBool test = false.obs;
   final List locale = [
     {'name': 'ENGLISH', 'locale': const Locale('en', 'US')},
@@ -410,7 +410,7 @@ class MainScreen extends StatelessWidget {
           color: typeTheme ? AppColors.textDarkColor : AppColors.textLightColor,
         ),
       ),
-      content: Container(
+      content: SizedBox(
           width: double.maxFinite,
           child: ListView.separated(
               shrinkWrap: true,

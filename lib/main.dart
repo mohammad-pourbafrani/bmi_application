@@ -1,10 +1,7 @@
 import 'package:bmi_application/models/info_user.dart';
-import 'package:bmi_application/utils/appcolors.dart';
 import 'package:bmi_application/utils/lanqueages.dart';
 import 'package:bmi_application/utils/theme.dart';
-import 'package:bmi_application/views/main_screen.dart';
 import 'package:bmi_application/views/splash_screen.dart';
-import 'package:bmi_application/views/summeryscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -29,7 +26,7 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('en', 'US'),
       theme: Themes.lightTheme,
       darkTheme: Themes.darkTheme,
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }
