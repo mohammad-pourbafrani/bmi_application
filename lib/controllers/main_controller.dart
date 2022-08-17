@@ -140,6 +140,14 @@ class MainController extends GetxController {
     addNameController.clear();
   }
 
+  bool checkStatus(String status) {
+    if (status == "normal" || status == "طبیعی") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   getInfoUserByIndex(int index) {
     var infoUserBox = Hive.box(dbName);
     return infoUserBox.getAt(index) as InfoUser;

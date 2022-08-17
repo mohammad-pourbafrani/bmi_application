@@ -175,9 +175,9 @@ class ListScreen extends StatelessWidget {
                                   const SizedBox(
                                     width: 8,
                                   ),
-                                  mController.dataUserInfoFilter[index].status
-                                              .toLowerCase() ==
-                                          "normal"
+                                  mController.checkStatus(mController
+                                          .dataUserInfoFilter[index].status
+                                          .toLowerCase())
                                       ? const Icon(
                                           Icons.check_circle_outline_rounded,
                                           color: Colors.green,
