@@ -49,6 +49,8 @@ class Languages extends Translations {
           'next_month': 'Next',
           'current_month': 'Current',
           'save_snackbar': 'Save',
+          'change_lanquage': 'Change Lanquage',
+          'kg': 'Kg/m2',
         },
         'fa_IR': {
           'title1': 'BMI چیست؟',
@@ -88,13 +90,15 @@ class Languages extends Translations {
           'btn_save': 'دخیره',
           'massage_save': 'اطلاعات با موفقیت دخیره شد.',
           'select_name': 'انتخاب نام',
-          'text_bmi': 'Bmi',
+          'text_bmi': 'شاخص توده بدنی',
           'date_save': 'زمان',
           'status': 'وضعیت',
           'last_month': 'قبل',
           'next_month': 'بعد',
           'current_month': 'جاری',
           'save_snackbar': 'دخیره',
+          'change_lanquage': 'تغییر زبان',
+          'kg': 'کیلوگرم برمجذور قد(متر)',
         }
       };
 }

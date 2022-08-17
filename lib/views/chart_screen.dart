@@ -23,13 +23,19 @@ class ChartScreen extends StatelessWidget {
     "November",
     "December"
   ];
+
   @override
   Widget build(BuildContext context) {
+    bool typeTheme =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(top: 10),
         child: Column(
           children: [
+            const SizedBox(
+              height: 10,
+            ),
             SizedBox(
               width: Get.size.width,
               height: Get.size.height / 9,
@@ -37,6 +43,9 @@ class ChartScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ControlButton(
+                    bgColor: typeTheme
+                        ? AppColors.appBarDarkColor
+                        : AppColors.bgLightColorButtonControl,
                     size: Get.size,
                     onTab: () {
                       mainController.time = mainController.time
@@ -44,15 +53,26 @@ class ChartScreen extends StatelessWidget {
                       mainController.fillDataChart();
                     },
                     widgets: [
-                      const Icon(Icons.keyboard_double_arrow_left_rounded),
+                      Icon(
+                        Icons.keyboard_double_arrow_left_rounded,
+                        color: typeTheme
+                            ? AppColors.textDarkColor
+                            : AppColors.textLightColor,
+                      ),
                       Text(
                         'last_month'.tr,
-                        style:
-                            Get.textTheme.headline1!.apply(color: Colors.black),
+                        style: Get.textTheme.headline1!.apply(
+                          color: typeTheme
+                              ? AppColors.textDarkColor
+                              : AppColors.textLightColor,
+                        ),
                       ),
                     ],
                   ),
                   ControlButton(
+                    bgColor: typeTheme
+                        ? AppColors.appBarDarkColor
+                        : AppColors.bgLightColorButtonControl,
                     size: Get.size,
                     onTab: () {
                       mainController.time = DateTime.now();
@@ -61,12 +81,18 @@ class ChartScreen extends StatelessWidget {
                     widgets: [
                       Text(
                         'current_month'.tr,
-                        style:
-                            Get.textTheme.headline1!.apply(color: Colors.black),
+                        style: Get.textTheme.headline1!.apply(
+                          color: typeTheme
+                              ? AppColors.textDarkColor
+                              : AppColors.textLightColor,
+                        ),
                       ),
                     ],
                   ),
                   ControlButton(
+                    bgColor: typeTheme
+                        ? AppColors.appBarDarkColor
+                        : AppColors.bgLightColorButtonControl,
                     size: Get.size,
                     onTab: () {
                       mainController.time =
@@ -76,10 +102,18 @@ class ChartScreen extends StatelessWidget {
                     widgets: [
                       Text(
                         'next_month'.tr,
-                        style:
-                            Get.textTheme.headline1!.apply(color: Colors.black),
+                        style: Get.textTheme.headline1!.apply(
+                          color: typeTheme
+                              ? AppColors.textDarkColor
+                              : AppColors.textLightColor,
+                        ),
                       ),
-                      const Icon(Icons.keyboard_double_arrow_right_rounded),
+                      Icon(
+                        Icons.keyboard_double_arrow_right_rounded,
+                        color: typeTheme
+                            ? AppColors.textDarkColor
+                            : AppColors.textLightColor,
+                      ),
                     ],
                   ),
                 ],
@@ -92,8 +126,10 @@ class ChartScreen extends StatelessWidget {
                 height: Get.size.height / 3 * 1.1,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  gradient: const LinearGradient(
-                    colors: GradianetAppColors.backgrandColorWeightChart,
+                  gradient: LinearGradient(
+                    colors: typeTheme
+                        ? GradianetAppColors.backgrandColorDarkWeightChart
+                        : GradianetAppColors.backgrandColorLightWeightChart,
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                   ),
@@ -134,13 +170,13 @@ class ChartScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     'weight'.tr,
-                                    style: Get.textTheme.headline1!.apply(
+                                    style: Get.textTheme.headline2!.apply(
                                       color: Colors.white,
                                     ),
                                   ),
                                   Text(
                                     "${months[mainController.time.month]}  ${mainController.time.year}",
-                                    style: Get.textTheme.headline1!.apply(
+                                    style: Get.textTheme.headline2!.apply(
                                       color: Colors.white,
                                     ),
                                   ),
@@ -229,8 +265,10 @@ class ChartScreen extends StatelessWidget {
                 height: Get.size.height / 3 * 1.1,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  gradient: const LinearGradient(
-                    colors: GradianetAppColors.backgrandColorBmiChart,
+                  gradient: LinearGradient(
+                    colors: typeTheme
+                        ? GradianetAppColors.backgrandDarkColorBmiChart
+                        : GradianetAppColors.backgrandLightColorBmiChart,
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                   ),
@@ -271,13 +309,13 @@ class ChartScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     'text_bmi'.tr,
-                                    style: Get.textTheme.headline1!.apply(
+                                    style: Get.textTheme.headline2!.apply(
                                       color: Colors.white,
                                     ),
                                   ),
                                   Text(
                                     "${months[mainController.time.month]}  ${mainController.time.year}",
-                                    style: Get.textTheme.headline1!.apply(
+                                    style: Get.textTheme.headline2!.apply(
                                       color: Colors.white,
                                     ),
                                   ),

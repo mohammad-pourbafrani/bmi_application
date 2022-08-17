@@ -10,6 +10,8 @@ class ListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool typeTheme =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Column(
       children: [
         Form(
@@ -20,12 +22,14 @@ class ListScreen extends StatelessWidget {
                 builder: (FormFieldState<String> state) {
                   return InputDecorator(
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.fromLTRB(12, 10, 20, 20),
+                      contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       enabledBorder: Get
                           .theme.inputDecorationTheme.enabledBorder!
                           .copyWith(
-                        borderSide:
-                            const BorderSide(width: 2.0, color: Colors.grey),
+                        borderSide: const BorderSide(
+                          width: 2.0,
+                          color: AppColors.cardLightColor,
+                        ),
                       ),
                     ),
                     child: DropdownButtonHideUnderline(
@@ -35,19 +39,28 @@ class ListScreen extends StatelessWidget {
                           hint: mainController.nameSelectBox.value.isEmpty
                               ? Text(
                                   'select_name'.tr,
-                                  style: Get.textTheme.subtitle2!.apply(
-                                    color: Colors.black,
+                                  style: Get.textTheme.subtitle1!.apply(
+                                    color: typeTheme
+                                        ? AppColors.textDarkColor
+                                        : AppColors.textLightColor,
                                   ),
                                 )
                               : Text(
                                   mainController.nameSelectBox.value,
-                                  style: Get.textTheme.subtitle2!.apply(
-                                    color: Colors.black,
+                                  style: Get.textTheme.subtitle1!.apply(
+                                    color: typeTheme
+                                        ? AppColors.textDarkColor
+                                        : AppColors.textLightColor,
                                   ),
                                 ),
                           borderRadius: BorderRadius.circular(8),
+                          dropdownColor: typeTheme
+                              ? AppColors.appBarDarkColor
+                              : AppColors.bgLightColorButtonControl,
                           style: Get.textTheme.headline3!.apply(
-                            color: Colors.black,
+                            color: typeTheme
+                                ? AppColors.textDarkColor
+                                : AppColors.textLightColor,
                           ),
                           onChanged: (name) {
                             mainController.nameSelectBox.value = name!;
@@ -87,15 +100,18 @@ class ListScreen extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                       child: Container(
-                        width: mainController.size.width,
-                        height: mainController.size.height / 4,
+                        // width: mainController.size.width,
+                        // height: mainController.size.height / 4,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: Colors.grey,
-                              width: 2.0,
-                            ),
-                            color: Colors.grey.shade300),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: AppColors.cardLightColor,
+                            width: 2.0,
+                          ),
+                          color: typeTheme
+                              ? AppColors.appBarDarkColor
+                              : AppColors.bgLightColorButtonControl,
+                        ),
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
                           child: Column(
@@ -110,13 +126,19 @@ class ListScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     "${'weight'.tr} : ${mController.dataUserInfoFilter[index].weight}",
-                                    style: Get.textTheme.headline1!
-                                        .apply(color: AppColors.textLightColor),
+                                    style: Get.textTheme.headline1!.apply(
+                                      color: typeTheme
+                                          ? AppColors.textDarkColor
+                                          : AppColors.textLightColor,
+                                    ),
                                   ),
                                   Text(
                                     "${'height'.tr} : ${mController.dataUserInfoFilter[index].height}",
-                                    style: Get.textTheme.headline1!
-                                        .apply(color: AppColors.textLightColor),
+                                    style: Get.textTheme.headline1!.apply(
+                                      color: typeTheme
+                                          ? AppColors.textDarkColor
+                                          : AppColors.textLightColor,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -129,8 +151,11 @@ class ListScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     "${'text_bmi'.tr} : ${mController.dataUserInfoFilter[index].bmi.toStringAsFixed(2)}",
-                                    style: Get.textTheme.headline3!
-                                        .apply(color: AppColors.textLightColor),
+                                    style: Get.textTheme.headline3!.apply(
+                                      color: typeTheme
+                                          ? AppColors.textDarkColor
+                                          : AppColors.textLightColor,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -141,8 +166,11 @@ class ListScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     "${'status'.tr} : ${mController.dataUserInfoFilter[index].status}",
-                                    style: Get.textTheme.headline3!
-                                        .apply(color: AppColors.textLightColor),
+                                    style: Get.textTheme.headline3!.apply(
+                                      color: typeTheme
+                                          ? AppColors.textDarkColor
+                                          : AppColors.textLightColor,
+                                    ),
                                   ),
                                   const SizedBox(
                                     width: 8,
@@ -165,8 +193,11 @@ class ListScreen extends StatelessWidget {
                               ),
                               Text(
                                 "${'date_save'.tr} : ${mController.dataUserInfoFilter[index].date.toString().substring(0, 10)}",
-                                style: Get.textTheme.headline3!
-                                    .apply(color: AppColors.textLightColor),
+                                style: Get.textTheme.headline3!.apply(
+                                  color: typeTheme
+                                      ? AppColors.textDarkColor
+                                      : AppColors.textLightColor,
+                                ),
                               ),
                             ],
                           ),

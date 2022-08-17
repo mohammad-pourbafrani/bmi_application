@@ -3,13 +3,13 @@ import 'dart:developer' as developer;
 import 'package:bmi_application/models/info_user.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'dart:math';
 import 'package:hive/hive.dart';
 
 class MainController extends GetxController {
   //variables
-
   var size = Get.size;
   var bottomNavIndex = 2.obs;
   var gender = "female".obs;
@@ -51,9 +51,27 @@ class MainController extends GetxController {
   //function
 
   @override
-  void onInit() {
+  void onInit() async {
+    await Hive.openBox('detiails');
+    loadLanquage();
     getAllInfo();
     super.onInit();
+  }
+
+  void saveLanquage({String? country, String? lanquage}) {
+    var lanBox = Hive.box('detiails');
+    lanBox.put('countryCod', country);
+    lanBox.put('lanCod', lanquage);
+  }
+
+  void loadLanquage() {
+    var lanBox = Hive.box('detiails');
+    if (lanBox.isNotEmpty) {
+      String country = lanBox.get('countryCod');
+      String lan = lanBox.get('lanCod');
+      Locale locale = Locale(lan, country);
+      Get.updateLocale(locale);
+    }
   }
 
   void changeLocationFloatAction(int val) {

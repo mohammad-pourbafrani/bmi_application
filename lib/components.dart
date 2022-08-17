@@ -4,10 +4,12 @@ import 'package:get/get.dart';
 import 'package:inview_notifier_list/inview_notifier_list.dart';
 
 class GetStartButton extends StatelessWidget {
-  const GetStartButton({Key? key, required this.size, required this.onTab})
+  const GetStartButton(
+      {Key? key, required this.size, required this.onTab, required this.color})
       : super(key: key);
   final Size size;
   final VoidCallback onTab;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -18,7 +20,7 @@ class GetStartButton extends StatelessWidget {
         height: size.height / 13,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: AppColors.btnLightColor,
+          color: color,
         ),
         child: Center(
           child: Text(
@@ -32,10 +34,17 @@ class GetStartButton extends StatelessWidget {
 }
 
 class SkipButton extends StatelessWidget {
-  const SkipButton({Key? key, required this.size, required this.onTab})
+  const SkipButton(
+      {Key? key,
+      required this.size,
+      required this.onTab,
+      required this.color,
+      required this.colorText})
       : super(key: key);
   final Size size;
   final VoidCallback onTab;
+  final Color color;
+  final Color colorText;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -48,14 +57,15 @@ class SkipButton extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             border: Border.all(
-              color: AppColors.btnLightColor,
+              color: color,
+              //AppColors.btnLightColor,
               width: 2,
             ),
           ),
           child: Center(
             child: Text(
               'skip'.tr,
-              style: Get.textTheme.headline1!.apply(color: Colors.black),
+              style: Get.textTheme.headline1!.apply(color: colorText),
             ),
           ),
         ),
@@ -69,11 +79,13 @@ class ControlButton extends StatelessWidget {
       {Key? key,
       required this.size,
       required this.onTab,
-      required this.widgets})
+      required this.widgets,
+      required this.bgColor})
       : super(key: key);
   final Size size;
   final VoidCallback onTab;
   final List<Widget> widgets;
+  final Color bgColor;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +100,7 @@ class ControlButton extends StatelessWidget {
               color: Colors.grey,
               width: 2,
             ),
-            color: Colors.grey.shade200),
+            color: bgColor),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: widgets,
@@ -99,29 +111,31 @@ class ControlButton extends StatelessWidget {
 }
 
 class CustomiesCardInkwel extends StatelessWidget {
-  const CustomiesCardInkwel(
-      {Key? key,
-      required this.chaild,
-      required this.onTab,
-      required this.select})
-      : super(key: key);
+  const CustomiesCardInkwel({
+    Key? key,
+    required this.chaild,
+    required this.onTab,
+    required this.select,
+    required this.color,
+  }) : super(key: key);
 
   final Widget chaild;
   final VoidCallback onTab;
   final bool select;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTab,
       child: Card(
-        color: AppColors.scaffoldLightColor,
+        color: color,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
           side: BorderSide(
             color: select
                 ? AppColors.selectedCardLightColor
-                : AppColors.cardLightColor,
+                : AppColors.cardLightColor ,
             width: 3,
           ),
         ),
@@ -132,14 +146,16 @@ class CustomiesCardInkwel extends StatelessWidget {
 }
 
 class CustomiesCard extends StatelessWidget {
-  const CustomiesCard({Key? key, required this.chaild}) : super(key: key);
+  const CustomiesCard({Key? key, required this.chaild, required this.color})
+      : super(key: key);
 
   final Widget chaild;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppColors.scaffoldLightColor,
+      color: color,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: const BorderSide(
@@ -155,9 +171,11 @@ class CustomiesCard extends StatelessWidget {
 ScrollController scrollController = ScrollController();
 
 class HeightNumber extends StatelessWidget {
-  const HeightNumber({Key? key, required this.result}) : super(key: key);
+  const HeightNumber({Key? key, required this.result, required this.color})
+      : super(key: key);
 
   final Function(int) result;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -188,10 +206,8 @@ class HeightNumber extends StatelessWidget {
                   index.toString(),
                   // key: ValueKey("item-$index"),
                   style: isInView
-                      ? Get.textTheme.headline4!
-                          .apply(color: AppColors.textLightColor)
-                      : Get.textTheme.subtitle1!
-                          .apply(color: AppColors.textLightColor),
+                      ? Get.textTheme.headline4!.apply(color: color)
+                      : Get.textTheme.subtitle1!.apply(color: color),
                 );
               },
             ),
@@ -220,17 +236,17 @@ class HeightNumber extends StatelessWidget {
 //           })),
 
 class Ruler extends StatelessWidget {
-  const Ruler({Key? key}) : super(key: key);
-
+  const Ruler({Key? key, required this.color}) : super(key: key);
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
       scrollDirection: Axis.horizontal,
       itemBuilder: ((context, index) {
-        return const Padding(
-          padding: EdgeInsets.only(left: 8),
+        return Padding(
+          padding: const EdgeInsets.only(left: 8),
           child: VerticalDivider(
-            color: AppColors.rulerLightColor,
+            color: color,
             thickness: 2,
             width: 10,
             indent: 20,
@@ -241,10 +257,10 @@ class Ruler extends StatelessWidget {
       itemCount: 12,
       separatorBuilder: (BuildContext context, int index) {
         if (index % 5 == 0) {
-          return const Padding(
-            padding: EdgeInsets.only(left: 8),
+          return Padding(
+            padding: const EdgeInsets.only(left: 8),
             child: VerticalDivider(
-              color: AppColors.rulerLightColor,
+              color: color,
               thickness: 2,
               width: 10,
               indent: 10,

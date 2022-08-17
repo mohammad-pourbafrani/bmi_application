@@ -6,38 +6,88 @@ import 'package:bmi_application/views/homescreen.dart';
 import 'package:bmi_application/views/list_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({Key? key}) : super(key: key);
-  // MainController mainController = Get.put(MainController());
+  MainScreen({Key? key}) : super(key: key);
+  MainController mainController = Get.put(MainController());
   // RxBool test = false.obs;
+  final List locale = [
+    {'name': 'ENGLISH', 'locale': const Locale('en', 'US')},
+    {'name': 'فارسی', 'locale': const Locale('fa', 'IR')},
+  ];
 
   @override
   Widget build(BuildContext context) {
+    bool typeTheme =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
+    SystemChrome.setSystemUIOverlayStyle(
+      typeTheme
+          ? const SystemUiOverlayStyle(
+              statusBarColor: AppColors.appBarDarkColor,
+              systemNavigationBarColor: AppColors.primeryDarkColor,
+            )
+          : const SystemUiOverlayStyle(
+              statusBarColor: AppColors.scaffoldLightColor,
+              systemNavigationBarColor: AppColors.primeryLightColor,
+            ),
+    );
     return SafeArea(
       child: GetBuilder(
         init: MainController(),
         builder: (MainController mainController) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: AppColors.scaffoldLightColor,
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'textHeaderHomescreen'.tr,
-                    style: Get.textTheme.headline4!.apply(color: Colors.black),
-                  ),
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.menu_rounded,
-                        color: Colors.black,
-                        size: 32,
-                      ))
-                ],
+              title: Text(
+                'textHeaderHomescreen'.tr,
+                style: Get.textTheme.headline4!.apply(
+                    color: typeTheme ? AppColors.white : AppColors.black),
               ),
+              actions: [
+                PopupMenuButton<int>(
+                  color: typeTheme
+                      ? AppColors.appBarDarkColor
+                      : const Color.fromARGB(255, 204, 204, 204),
+                  icon: Icon(
+                    Icons.menu,
+                    color: typeTheme ? AppColors.white : AppColors.black,
+                    size: 32,
+                  ),
+                  offset: Offset(0, Get.height / 12),
+                  elevation: 2,
+                  itemBuilder: (context) => [
+                    PopupMenuItem(
+                      value: 1,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.g_translate_rounded,
+                            color:
+                                typeTheme ? AppColors.white : AppColors.black,
+                            size: 24,
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            'change_lanquage'.tr,
+                            style: Get.textTheme.headline1!.apply(
+                                color: typeTheme
+                                    ? AppColors.white
+                                    : AppColors.black),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                  onSelected: (value) {
+                    if (value == 1) {
+                      changeLanguageAlertDialog(context, typeTheme);
+                    }
+                  },
+                )
+              ],
             ),
             body: Column(
               children: [
@@ -56,10 +106,13 @@ class MainScreen extends StatelessWidget {
               ],
             ),
             floatingActionButton: FloatingActionButton(
-              backgroundColor: AppColors.floatActionLightColor,
+              backgroundColor: typeTheme
+                  ? AppColors.floatActionDarkColor
+                  : AppColors.floatActionLightColor,
               child: Text(
                 'bmi'.tr,
-                style: Get.textTheme.headline2!.apply(color: Colors.white),
+                style: Get.textTheme.headline2!.apply(
+                    color: typeTheme ? AppColors.black : AppColors.white),
               ),
               onPressed: () {
                 if (mainController.bottomNavIndex.value != 2) {
@@ -74,8 +127,8 @@ class MainScreen extends StatelessWidget {
                       width: mainController.size.width,
                       height: mainController.size.height / 1.5,
                       decoration: BoxDecoration(
-                          color: Get.isDarkMode
-                              ? AppColors.primeryLightColor
+                          color: typeTheme
+                              ? AppColors.appBarDarkColor
                               : AppColors.primeryLightColor,
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(24),
@@ -95,7 +148,7 @@ class MainScreen extends StatelessWidget {
                                 height: 10,
                               ),
                               Text(
-                                "${mainController.bmi.toStringAsFixed(2)} kg/m2",
+                                "${mainController.bmi.toStringAsFixed(2)} ${'kg'.tr}",
                                 style: Get.textTheme.headline4!
                                     .apply(color: Colors.white),
                               ),
@@ -132,8 +185,8 @@ class MainScreen extends StatelessWidget {
                                           height:
                                               mainController.size.height / 2.5,
                                           decoration: BoxDecoration(
-                                            color: Get.isDarkMode
-                                                ? AppColors.primeryLightColor
+                                            color: typeTheme
+                                                ? AppColors.appBarDarkColor
                                                 : AppColors.primeryLightColor,
                                             borderRadius:
                                                 const BorderRadius.only(
@@ -229,6 +282,12 @@ class MainScreen extends StatelessWidget {
                                                     Get.snackbar(
                                                         'save_snackbar'.tr,
                                                         'massage_save'.tr,
+                                                        colorText: typeTheme
+                                                            ? AppColors
+                                                                .textDarkColor
+                                                            : AppColors
+                                                                .textLightColor,
+                                                        barBlur: 5,
                                                         duration:
                                                             const Duration(
                                                                 milliseconds:
@@ -305,14 +364,16 @@ class MainScreen extends StatelessWidget {
             floatingActionButtonLocation:
                 mainController.floatingActionButtonLocation,
             bottomNavigationBar: AnimatedBottomNavigationBar(
-                backgroundColor: AppColors.primeryLightColor,
+                backgroundColor: typeTheme
+                    ? AppColors.primeryDarkColor
+                    : AppColors.primeryLightColor,
                 icons: const [
                   Icons.ssid_chart_rounded,
                   CupertinoIcons.line_horizontal_3_decrease,
                 ],
                 gapLocation: GapLocation.center,
-                activeColor: AppColors.activeIconNavBarLightColor,
-                inactiveColor: AppColors.activeIconNavBarLightColor,
+                activeColor: typeTheme ? AppColors.black : AppColors.white,
+                inactiveColor: typeTheme ? AppColors.black : AppColors.white,
                 iconSize: 32,
                 height: mainController.size.height / 12.5,
                 notchSmoothness: NotchSmoothness.softEdge,
@@ -326,6 +387,65 @@ class MainScreen extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  updateLanguage(Locale locale) {
+    Get.back();
+    Get.updateLocale(locale);
+
+    mainController.saveLanquage(
+        country: locale.countryCode, lanquage: locale.languageCode);
+  }
+
+  changeLanguageAlertDialog(BuildContext context, bool typeTheme) {
+    // set up the button
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      backgroundColor:
+          typeTheme ? AppColors.appBarDarkColor : AppColors.scaffoldLightColor,
+      title: Text(
+        'change_lanquage'.tr,
+        style: Get.textTheme.headline1!.apply(
+          color: typeTheme ? AppColors.textDarkColor : AppColors.textLightColor,
+        ),
+      ),
+      content: Container(
+          width: double.maxFinite,
+          child: ListView.separated(
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    child: Text(
+                      locale[index]['name'],
+                      style: Get.textTheme.headline1!.apply(
+                        color: typeTheme
+                            ? AppColors.textDarkColor
+                            : AppColors.textLightColor,
+                      ),
+                    ),
+                    onTap: () {
+                      updateLanguage(locale[index]['locale']);
+                    },
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) {
+                return Divider(
+                  color: typeTheme
+                      ? AppColors.primeryDarkColor
+                      : AppColors.primeryLightColor,
+                );
+              },
+              itemCount: locale.length)),
+    ); // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:bmi_application/controllers/summery_controller.dart';
 import 'package:bmi_application/utils/appcolors.dart';
 import 'package:bmi_application/views/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../models/itemes_model.dart';
@@ -15,6 +16,20 @@ class SummeryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool typeTheme =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
+
+    SystemChrome.setSystemUIOverlayStyle(
+      typeTheme
+          ? const SystemUiOverlayStyle(
+              statusBarColor: AppColors.appBarDarkColor,
+              systemNavigationBarColor: AppColors.appBarDarkColor,
+            )
+          : const SystemUiOverlayStyle(
+              statusBarColor: AppColors.scaffoldLightColor,
+              systemNavigationBarColor: AppColors.scaffoldLightColor,
+            ),
+    );
     return SafeArea(
       child: Scaffold(
         body: SizedBox(
@@ -55,7 +70,9 @@ class SummeryScreen extends StatelessWidget {
                                   summeryItems[index].title,
                                   textAlign: TextAlign.center,
                                   style: Get.textTheme.headline1!.apply(
-                                    color: AppColors.textTitleLightColor,
+                                    color: typeTheme
+                                        ? AppColors.textTitleDarkColor
+                                        : AppColors.textTitleLightColor,
                                   ),
                                 ),
                               )),
@@ -86,14 +103,18 @@ class SummeryScreen extends StatelessWidget {
                     SmoothPageIndicator(
                       controller: summeryController.pageController,
                       count: summeryItems.length,
-                      effect: const ExpandingDotsEffect(
+                      effect: ExpandingDotsEffect(
                           spacing: 6.0,
                           radius: 10.0,
                           dotWidth: 10.0,
                           dotHeight: 10.0,
                           expansionFactor: 3.8,
-                          dotColor: AppColors.dotLightColor,
-                          activeDotColor: AppColors.dotActiveLightColor),
+                          dotColor: typeTheme
+                              ? AppColors.dotDarkColor
+                              : AppColors.dotLightColor,
+                          activeDotColor: typeTheme
+                              ? AppColors.dotActiveDarkColor
+                              : AppColors.dotActiveLightColor),
                       onDotClicked: (newIndex) {
                         summeryController.curentIndex.value = newIndex;
                         summeryController.pageController.animateToPage(
@@ -106,14 +127,22 @@ class SummeryScreen extends StatelessWidget {
                     Obx((() {
                       return summeryController.curentIndex.value == 2
                           ? GetStartButton(
+                              color: typeTheme
+                                  ? AppColors.btnDarckColor
+                                  : AppColors.btnLightColor,
                               size: summeryController.size,
                               onTab: () {
                                 Get.off(
-                                  const MainScreen(),
+                                  MainScreen(),
                                 );
                               },
                             )
                           : SkipButton(
+                              color: typeTheme
+                                  ? AppColors.btnDarckColor
+                                  : AppColors.btnLightColor,
+                              colorText:
+                                  typeTheme ? AppColors.white : AppColors.black,
                               size: summeryController.size,
                               onTab: () {
                                 summeryController.pageController.animateToPage(

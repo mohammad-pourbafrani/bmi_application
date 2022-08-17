@@ -12,9 +12,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool typeTheme =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.scaffoldLightColor,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(right: 16, left: 16, top: 16),
@@ -27,6 +28,9 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Expanded(child: Obx((() {
                       return CustomiesCardInkwel(
+                        color: typeTheme
+                            ? AppColors.appBarDarkColor
+                            : AppColors.scaffoldLightColor,
                         onTab: () {
                           mainController.gender.value = "male";
                         },
@@ -44,8 +48,10 @@ class HomeScreen extends StatelessWidget {
                               ),
                               Text(
                                 'male'.tr,
-                                style: Get.textTheme.headline3!
-                                    .apply(color: AppColors.textLightColor),
+                                style: Get.textTheme.headline3!.apply(
+                                    color: typeTheme
+                                        ? AppColors.textDarkColor
+                                        : AppColors.textLightColor),
                               )
                             ],
                           ),
@@ -58,6 +64,9 @@ class HomeScreen extends StatelessWidget {
                     Expanded(
                       child: Obx((() {
                         return CustomiesCardInkwel(
+                          color: typeTheme
+                              ? AppColors.appBarDarkColor
+                              : AppColors.scaffoldLightColor,
                           onTab: () {
                             mainController.gender.value = "female";
                           },
@@ -75,8 +84,10 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   'fmale'.tr,
-                                  style: Get.textTheme.headline3!
-                                      .apply(color: AppColors.textLightColor),
+                                  style: Get.textTheme.headline3!.apply(
+                                      color: typeTheme
+                                          ? AppColors.textDarkColor
+                                          : AppColors.textLightColor),
                                 )
                               ],
                             ),
@@ -91,6 +102,9 @@ class HomeScreen extends StatelessWidget {
                 ),
                 //height
                 CustomiesCard(
+                  color: typeTheme
+                      ? AppColors.appBarDarkColor
+                      : AppColors.scaffoldLightColor,
                   chaild: SizedBox(
                     height: mainController.size.height / 4,
                     width: double.infinity,
@@ -99,13 +113,18 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Text(
                           'height'.tr,
-                          style: Get.textTheme.headline3!
-                              .apply(color: AppColors.textLightColor),
+                          style: Get.textTheme.headline3!.apply(
+                              color: typeTheme
+                                  ? AppColors.textDarkColor
+                                  : AppColors.textLightColor),
                         ),
                         SizedBox(
                           height: (Get.size.height / 19) * 1.5,
                           width: (Get.size.width / 5) * 4,
                           child: HeightNumber(
+                            color: typeTheme
+                                ? AppColors.textDarkColor
+                                : AppColors.textLightColor,
                             result: (int height) {
                               mainController.height = height;
                             },
@@ -114,7 +133,11 @@ class HomeScreen extends StatelessWidget {
                         SizedBox(
                           height: (Get.size.height / 19) * 1.5,
                           width: (Get.size.width / 7) * 5,
-                          child: const Ruler(),
+                          child: Ruler(
+                            color: typeTheme
+                                ? AppColors.rulerDarckColor
+                                : AppColors.rulerLightColor,
+                          ),
                         )
                       ],
                     ),
@@ -128,6 +151,9 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: CustomiesCard(
+                        color: typeTheme
+                            ? AppColors.appBarDarkColor
+                            : AppColors.scaffoldLightColor,
                         chaild: SizedBox(
                           height: mainController.size.height / 5,
                           child: Column(
@@ -135,21 +161,30 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               Text(
                                 'weight'.tr,
-                                style: Get.textTheme.headline3!
-                                    .apply(color: AppColors.textLightColor),
+                                style: Get.textTheme.headline3!.apply(
+                                    color: typeTheme
+                                        ? AppColors.textDarkColor
+                                        : AppColors.textLightColor),
                               ),
                               Container(
                                 width: (Get.size.width / 3.5),
                                 height: (Get.size.height / 18.5) * 1.5,
                                 decoration: BoxDecoration(
-                                  color: AppColors.cardLightColor,
+                                  color: typeTheme
+                                      ? AppColors.appBarDarkColor
+                                      : AppColors.cardLightColor,
                                   border: Border.all(
-                                    color: AppColors.rulerLightColor,
+                                    color: typeTheme
+                                        ? AppColors.rulerDarckColor
+                                        : AppColors.rulerLightColor,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(25),
                                 ),
                                 child: HeightNumber(
+                                  color: typeTheme
+                                      ? AppColors.textDarkColor
+                                      : AppColors.textLightColor,
                                   result: (int weight) {
                                     mainController.weight = weight;
                                   },
@@ -165,6 +200,9 @@ class HomeScreen extends StatelessWidget {
                     ),
                     Expanded(
                       child: CustomiesCard(
+                        color: typeTheme
+                            ? AppColors.appBarDarkColor
+                            : AppColors.scaffoldLightColor,
                         chaild: SizedBox(
                           height: mainController.size.height / 5,
                           child: Column(
@@ -172,8 +210,10 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               Text(
                                 'age'.tr,
-                                style: Get.textTheme.headline3!
-                                    .apply(color: AppColors.textLightColor),
+                                style: Get.textTheme.headline3!.apply(
+                                    color: typeTheme
+                                        ? AppColors.textDarkColor
+                                        : AppColors.textLightColor),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -182,9 +222,12 @@ class HomeScreen extends StatelessWidget {
                                     onPressed: () {
                                       mainController.discrementAge();
                                     },
-                                    icon: const Icon(
+                                    icon: Icon(
                                       CupertinoIcons.minus_square,
                                       size: 32,
+                                      color: typeTheme
+                                          ? AppColors.textDarkColor
+                                          : AppColors.textLightColor,
                                     ),
                                   ),
                                   const SizedBox(
@@ -193,7 +236,9 @@ class HomeScreen extends StatelessWidget {
                                   Text(
                                     mainController.age.toString(),
                                     style: Get.textTheme.headline4!.apply(
-                                      color: AppColors.textLightColor,
+                                      color: typeTheme
+                                          ? AppColors.textDarkColor
+                                          : AppColors.textLightColor,
                                     ),
                                   ),
                                   const SizedBox(
@@ -203,9 +248,12 @@ class HomeScreen extends StatelessWidget {
                                     onPressed: () {
                                       mainController.incrementAge();
                                     },
-                                    icon: const Icon(
+                                    icon: Icon(
                                       CupertinoIcons.plus_app,
                                       size: 32,
+                                      color: typeTheme
+                                          ? AppColors.textDarkColor
+                                          : AppColors.textLightColor,
                                     ),
                                   ),
                                 ],
