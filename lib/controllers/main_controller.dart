@@ -1,9 +1,7 @@
 import 'dart:developer' as developer;
-
 import 'package:bmi_application/models/info_user.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'dart:math';
 import 'package:hive/hive.dart';

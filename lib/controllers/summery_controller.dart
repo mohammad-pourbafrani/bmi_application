@@ -11,4 +11,7 @@ class SummeryController extends GetxController {
   //other controller
   PageController pageController = PageController(initialPage: 0);
 
+  @override
+  // TODO: implement onDelete
+  InternalFinalCallback<void> get onDelete => super.onDelete;
 }

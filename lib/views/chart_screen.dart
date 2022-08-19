@@ -97,6 +97,7 @@ class ChartScreen extends StatelessWidget {
                     onTab: () {
                       mainController.time =
                           mainController.time.add(const Duration(days: 30));
+                      print(mainController.time);
                       mainController.fillDataChart();
                     },
                     widgets: [

@@ -22,8 +22,8 @@ class SummeryScreen extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(
       typeTheme
           ? const SystemUiOverlayStyle(
-              statusBarColor: AppColors.appBarDarkColor,
-              systemNavigationBarColor: AppColors.appBarDarkColor,
+              statusBarColor: AppColors.scaffoldDarkColor,
+              systemNavigationBarColor: AppColors.scaffoldDarkColor,
             )
           : const SystemUiOverlayStyle(
               statusBarColor: AppColors.scaffoldLightColor,
@@ -132,8 +132,9 @@ class SummeryScreen extends StatelessWidget {
                                   : AppColors.btnLightColor,
                               size: summeryController.size,
                               onTab: () {
+                                Get.find<SummeryController>().onDelete();
                                 Get.off(
-                                  MainScreen(),
+                                  () => MainScreen(),
                                 );
                               },
                             )

@@ -4,6 +4,7 @@ import 'package:bmi_application/utils/appcolors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -22,7 +23,6 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 8),
                 //gender
                 Row(
                   children: [
@@ -38,13 +38,13 @@ class HomeScreen extends StatelessWidget {
                             ? true
                             : false,
                         chaild: SizedBox(
-                          height: mainController.size.height / 5,
+                          height: mainController.size.height / 8,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.asset(
                                 'assets/images/male.png',
-                                height: mainController.size.height / 7,
+                                height: mainController.size.height / 14,
                               ),
                               Text(
                                 'male'.tr,
@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                       );
                     }))),
                     const SizedBox(
-                      width: 16,
+                      width: 2,
                     ),
                     Expanded(
                       child: Obx((() {
@@ -74,13 +74,13 @@ class HomeScreen extends StatelessWidget {
                               ? true
                               : false,
                           chaild: SizedBox(
-                            height: mainController.size.height / 5,
+                            height: mainController.size.height / 8,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
                                   'assets/images/fmale.png',
-                                  height: mainController.size.height / 7,
+                                  height: mainController.size.height / 14,
                                 ),
                                 Text(
                                   'fmale'.tr,
@@ -98,7 +98,7 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 2,
                 ),
                 //height
                 CustomiesCard(
@@ -144,9 +144,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 2,
                 ),
-                //
+
                 Row(
                   children: [
                     Expanded(
@@ -196,7 +196,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      width: 16,
+                      width: 4,
                     ),
                     Expanded(
                       child: CustomiesCard(
@@ -231,7 +231,7 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(
-                                    width: 16,
+                                    width: 8,
                                   ),
                                   Text(
                                     mainController.age.toString(),
@@ -242,7 +242,7 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(
-                                    width: 16,
+                                    width: 8,
                                   ),
                                   IconButton(
                                     onPressed: () {
@@ -264,7 +264,280 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ],
-                )
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                InkWell(
+                  onTap: () {
+                    mainController.getBmi();
+                    Get.bottomSheet(
+                      isDismissible: false,
+                      enableDrag: false,
+                      Container(
+                        width: mainController.size.width,
+                        height: mainController.size.height / 1.5,
+                        decoration: BoxDecoration(
+                            color: typeTheme
+                                ? AppColors.appBarDarkColor
+                                : AppColors.primeryLightColor,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(24),
+                              topRight: Radius.circular(24),
+                            )),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Text(
+                                  'yourbmi'.tr,
+                                  style: Get.textTheme.subtitle1!
+                                      .apply(color: Colors.white),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "${mainController.bmi.toStringAsFixed(2)} ${'kg'.tr}",
+                                  style: Get.textTheme.headline4!
+                                      .apply(color: Colors.white),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "(${mainController.status})",
+                                  style: Get.textTheme.headline2!
+                                      .apply(color: Colors.white),
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                  mainController.textBmi,
+                                  style: Get.textTheme.headline2!
+                                      .apply(color: Colors.white),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        Get.back();
+                                        Get.bottomSheet(
+                                          // isDismissible: false,
+                                          // enableDrag: false,
+                                          Container(
+                                            width: mainController.size.width,
+                                            height: mainController.size.height /
+                                                2.5,
+                                            decoration: BoxDecoration(
+                                              color: typeTheme
+                                                  ? AppColors.appBarDarkColor
+                                                  : AppColors.primeryLightColor,
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(24),
+                                                topRight: Radius.circular(24),
+                                              ),
+                                            ),
+                                            child: Obx(
+                                              () => Column(
+                                                children: [
+                                                  const SizedBox(
+                                                    height: 15,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        'save'.tr,
+                                                        style: Get.textTheme
+                                                            .subtitle2!
+                                                            .apply(
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Checkbox(
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                        ),
+                                                        checkColor:
+                                                            Colors.black,
+                                                        fillColor:
+                                                            MaterialStateProperty
+                                                                .resolveWith<
+                                                                        Color>(
+                                                                    (states) {
+                                                          if (states.contains(
+                                                              MaterialState
+                                                                  .selected)) {
+                                                            return Colors.white;
+                                                          }
+
+                                                          return Colors.white;
+                                                        }),
+                                                        value: mainController
+                                                            .checkBoxSave.value,
+                                                        onChanged: (check) {
+                                                          mainController
+                                                              .checkBoxSave
+                                                              .value = check!;
+                                                        },
+                                                      )
+                                                    ],
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            12.0),
+                                                    child: TextField(
+                                                      controller: mainController
+                                                          .addNameController,
+                                                      enabled: !mainController
+                                                          .checkBoxSave.value,
+                                                      style: Get
+                                                          .textTheme.subtitle2!
+                                                          .apply(
+                                                        color: Colors.white,
+                                                      ),
+                                                      decoration:
+                                                          InputDecoration(
+                                                        labelText:
+                                                            'inter_other_name'
+                                                                .tr,
+                                                        labelStyle: Get
+                                                            .textTheme
+                                                            .bodyText1!
+                                                            .apply(
+                                                                color: Colors
+                                                                    .white60),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  ElevatedButton(
+                                                    onPressed: () {
+                                                      mainController.addInfo(
+                                                          mainController
+                                                              .createInfoUser());
+                                                      Get.back();
+                                                      Get.snackbar(
+                                                          'save_snackbar'.tr,
+                                                          'massage_save'.tr,
+                                                          colorText: typeTheme
+                                                              ? AppColors
+                                                                  .textDarkColor
+                                                              : AppColors
+                                                                  .textLightColor,
+                                                          barBlur: 10,
+                                                          duration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      4000));
+                                                    },
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStateProperty
+                                                                .resolveWith(
+                                                                    (states) {
+                                                      return Colors.black;
+                                                    })),
+                                                    child: Text(
+                                                      'btn_save'.tr,
+                                                      style: Get
+                                                          .textTheme.headline2!
+                                                          .apply(
+                                                              color:
+                                                                  Colors.white),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      icon: const Icon(
+                                        CupertinoIcons.bookmark,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        Share.share(
+                                            "${'yourbmi'.tr} \n ${mainController.bmi.toStringAsFixed(2)} ${'kg'.tr} \n ${mainController.status} \n ${mainController.textBmi}");
+                                      },
+                                      icon: const Icon(
+                                        Icons.share,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Get.back();
+                                  },
+                                  child: Container(
+                                    width: 60,
+                                    height: 35,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(16),
+                                      color: Colors.black,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'close'.tr,
+                                        style: Get.textTheme.headline2!
+                                            .apply(color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: Get.width,
+                    height: Get.height / 13,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(24),
+                      color: typeTheme
+                          ? AppColors.floatActionDarkColor
+                          : AppColors.floatActionLightColor,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'bmi'.tr,
+                        style: Get.textTheme.subtitle2!.apply(
+                          color: typeTheme ? AppColors.white : AppColors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

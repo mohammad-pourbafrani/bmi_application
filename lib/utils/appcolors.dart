@@ -36,14 +36,14 @@ class AppColors {
 class GradianetAppColors {
   //gradianet light color
   static const backgrandColorLightWeightChart = [
-    Color.fromARGB(200, 13, 0, 201),
-    Color.fromARGB(220, 13, 0, 201),
-    Color.fromARGB(255, 13, 0, 201),
+    Color.fromARGB(190, 34, 18, 255),
+    Color.fromARGB(210, 34, 18, 255),
+    Color.fromARGB(239, 34, 18, 255),
   ];
   static const backgrandLightColorBmiChart = [
-    Color.fromARGB(220, 255, 72, 0),
-    Color.fromARGB(235, 255, 72, 0),
-    Color.fromARGB(255, 255, 72, 0),
+    Color.fromARGB(220, 199, 56, 0),
+    Color.fromARGB(235, 199, 56, 0),
+    Color.fromARGB(255, 199, 56, 0),
   ];
   static const belowColorWeightChart = [
     Color.fromARGB(100, 255, 255, 255),

@@ -32,11 +32,11 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     if (box.get("seen") == true) {
       box.close();
-      Get.off(MainScreen());
+      Get.off(() => MainScreen());
     } else if (box.get("seen") != true) {
       box.put("seen", true);
       box.close();
-      Get.off(SummeryScreen());
+      Get.off(() => SummeryScreen());
     }
   }
 
